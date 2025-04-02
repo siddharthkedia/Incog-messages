@@ -12,14 +12,14 @@ const PORT = process.env.PORT || 8000;
 // Initialize Firestore
 var serviceAccount
 if(PORT == 8000){
-    serviceAccount = JSON.parse(fs.readFileSync("serviceAccountKey.json", "utf8"));
+    serviceAccount = JSON.parse(fs.readFileSync("Users/siddharthkedia/Documents/serviceAccountKey.json", "utf8"));
 }
 else{
     serviceAccount = {
         type: "service_account",
         project_id: process.env.project_id,
         private_key_id: process.env.private_key_id,
-        private_key: process.env.private_key.replace(/\\n/g, '\n'), // Fix newlines
+        private_key: process.env.private_key, // Fix newlines
         client_email: process.env.client_email,
         client_id: process.env.client_id,
         auth_uri: "https://accounts.google.com/o/oauth2/auth",
