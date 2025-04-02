@@ -11,12 +11,23 @@ app.use(express.json());
 const PORT = process.env.PORT || 8000;
 // Initialize Firestore
 var serviceAccount
-// if(PORT == 8000){
-    // serviceAccount = JSON.parse(fs.readFileSync("serviceAccountKey.json", "utf8"));
-// }
-// else{
-    serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS.replace(/\\n/g, '\n'));
-// }
+if(PORT == 8000){
+    serviceAccount = JSON.parse(fs.readFileSync("serviceAccountKey.json", "utf8"));
+}
+else{
+    serviceAccount = {
+        type: "service_account",
+        project_id: process.env.project_id,
+        private_key_id: process.env.private_key_id,
+        private_key: process.env.private_key.replace(/\\n/g, '\n'), // Fix newlines
+        client_email: process.env.client_email,
+        client_id: process.env.client_id,
+        auth_uri: "https://accounts.google.com/o/oauth2/auth",
+        token_uri: "https://oauth2.googleapis.com/token",
+        auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+        client_x509_cert_url: process.env.client_x509_cert_url
+      };
+}
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 }); 
