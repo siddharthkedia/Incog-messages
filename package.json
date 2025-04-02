@@ -1,0 +1,25 @@
+{
+  "name": "incog-messages",
+  "version": "1.0.0",
+  "description": "Messaging app with self destructing messages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siddharthkedia/Incog-messages.git"
+  },
+  "author": "Siddharth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siddharthkedia/Incog-messages/issues"
+  },
+  "homepage": "https://github.com/siddharthkedia/Incog-messages#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.2.0"
+  }
+}
