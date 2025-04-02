@@ -8,9 +8,15 @@ require("dotenv").config();
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+const PORT = process.env.PORT || 8000;
 // Initialize Firestore
-const serviceAccount = JSON.parse(fs.readFileSync("serviceAccountKey.json", "utf8"));
+var serviceAccount
+// if(PORT == 8000){
+    // serviceAccount = JSON.parse(fs.readFileSync("serviceAccountKey.json", "utf8"));
+// }
+// else{
+    serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS.replace(/\\n/g, '\n'));
+// }
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 }); 
@@ -69,7 +75,7 @@ app.post("/create", async (req, res) => {
 
   
   // Start server
-  const PORT = process.env.PORT || 8000;
+  
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   app.use((req, res) => {
     res.status(404).json({ error: "Route not found" });
